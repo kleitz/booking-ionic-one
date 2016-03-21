@@ -55,10 +55,20 @@ angular.module('app.statesconfig', ['ionic'])
     })
 
     .state('app.service', {
-        url: '/shop-service/:shopId/service/:serviceId',
+        url: '/shop-service/:shopId/service/:serviceId?startDate&endDate',
         views: {
             'menuContent': {
                 templateUrl: 'templates/service.html',
+                controller : 'ServiceCtrl as ServiceCtrl'
+            }
+        }
+    })
+
+    .state('app.service-day', {
+        url: '/shop-service-day/:shopId/service/:serviceId/:selectedDate',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/service_day.html',
                 controller : 'ServiceCtrl as ServiceCtrl'
             }
         }

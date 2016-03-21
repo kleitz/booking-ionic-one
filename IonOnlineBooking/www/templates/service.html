@@ -9,7 +9,9 @@
     <div class="item item-body">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rem ab ut commodi ducimus aliquid hic consectetur, ipsam ex officiis natus atque quia eos repudiandae officia id in nam earum.</p>
     </div>
-
+  {{
+    ServiceCtrl.currentCalendarDate
+  }}
 
   <div ng-if="!ServiceCtrl.currentDay">
     <div class="item item-body item-royal text-center">
@@ -19,18 +21,21 @@
       <button class="button button-positive button-icon button-small icon ion-chevron-right button-small" ng-click="ServiceCtrl.nextMonth()">
     </div>
   
-    <calendar  title-changed="ServiceCtrl.onCalendarTitleChanged(title)" show-event-detail="false" event-source="ServiceCtrl.ranges" time-selected="onTimeSelected(selectedTime)"></calendar>
+    <calendar  title-changed="ServiceCtrl.onCalendarTitleChanged(title)" show-event-detail="false" event-source="ServiceCtrl.ranges" time-selected="onTimeSelected(selectedTime)" ng-model="ServiceCtrl.currentCalendarDate"></calendar>
   </div>
   <div ng-if="ServiceCtrl.currentDay">
-    <div class="item item-royal item-text-wrapitem-button-left">
-      <button class="button button-small button-royal" ng-click="ServiceCtrl.currentDay=null">
-        <i class="icon ion-chevron-left" ></i>
+    <div class="item item-royal item-text-wrap item-button-right">
+      <button class="button  button-royal" ng-click="ServiceCtrl.currentDay=null">
+        Cambia giorno
         
       </button>
-      {{ ServiceCtrl.currentDay }}
+      Disponibilità del {{ ServiceCtrl.currentDay }}
     </div>
-    <div class="item item-positive" ng-repeat="range in ServiceCtrl.rangesByDates[ServiceCtrl.currentDay]">
-      {{ range.start }} - {{ range.end }}
+    <div class="item item-positive item-button-right" ng-repeat="range in ServiceCtrl.rangesByDates[ServiceCtrl.currentDay]">
+      {{ range.start_moment.format("HH:mm") }} - {{ range.end_moment.format("HH:mm") }}
+      <button class="button button-energized button-outline">
+        Prenota
+      </button>
     </div>
   </div>
           <!--
