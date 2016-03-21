@@ -1,0 +1,47 @@
+<ion-view view-title="Service">
+  <ion-content class="has-header">
+  <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">{{ServiceCtrl.service.name}}</h1>
+        <p class="white-text">
+            {{ServiceCtrl.shop.name}}
+        </p>
+    </div>
+    <div class="item item-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rem ab ut commodi ducimus aliquid hic consectetur, ipsam ex officiis natus atque quia eos repudiandae officia id in nam earum.</p>
+    </div>
+
+
+  <div ng-if="!ServiceCtrl.currentDay">
+    <div class="item item-body item-royal text-center">
+      <button class="button button-positive button-icon button-small icon ion-chevron-left button-small" ng-click="ServiceCtrl.prevMonth()">
+      </button>
+      {{ ServiceCtrl.currentCalendarTitle }}
+      <button class="button button-positive button-icon button-small icon ion-chevron-right button-small" ng-click="ServiceCtrl.nextMonth()">
+    </div>
+  
+    <calendar  title-changed="ServiceCtrl.onCalendarTitleChanged(title)" show-event-detail="false" event-source="ServiceCtrl.ranges" time-selected="onTimeSelected(selectedTime)"></calendar>
+  </div>
+  <div ng-if="ServiceCtrl.currentDay">
+    <div class="item item-royal item-text-wrapitem-button-left">
+      <button class="button button-small button-royal" ng-click="ServiceCtrl.currentDay=null">
+        <i class="icon ion-chevron-left" ></i>
+        
+      </button>
+      {{ ServiceCtrl.currentDay }}
+    </div>
+    <div class="item item-positive" ng-repeat="range in ServiceCtrl.rangesByDates[ServiceCtrl.currentDay]">
+      {{ range.start }} - {{ range.end }}
+    </div>
+  </div>
+          <!--
+    <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">{{ServiceCtrl.service.name}}</h1>
+        <h2 class="white-text">{{ServiceCtrl.shop.name}}</h2>
+    </div>
+    
+    <div style="height:400px">
+
+    </div>-->
+    
+  </ion-content>
+</ion-view>

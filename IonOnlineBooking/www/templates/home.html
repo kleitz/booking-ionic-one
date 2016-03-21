@@ -1,0 +1,22 @@
+<ion-view view-title="Home">
+  <ion-content>
+    <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">Online Booking</h1>
+        <p class="white-text">
+            Prenotazioni online semplice e veloce
+        </p>
+    </div>
+    <div class="list">
+        <div class="item item-avatar item-text-wrap" ng-repeat="shop in HomeCtrl.shops" ui-sref="app.shop({shopId:shop.id})">
+            <img src="img/ionic.png" alt="">
+            <h2 class="title light-font">
+                {{shop.name}}
+            </h2>
+            <p class="">
+                Descrizione shop
+            </p>
+        </div>
+    </div>
+    
+  </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view view-title="Shop">
+  <ion-content>
+    <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">{{ShopCtrl.shop.name}}</h1>
+        <p class="white-text">
+            Descrizione shop
+        </p>
+    </div>
+    <div class="list">
+        <div class="item  item-avatar item-text-wrap" ng-repeat="service in ShopCtrl.services" ui-sref="app.service({shopId:ShopCtrl.shop.id, serviceId:service.id})">
+            <img src="img/ionic.png" alt="">
+            <h2 class="title light-font">
+                {{service.name}}
+            </h2>
+            <p class="">
+                Descrizione servizio.
+            </p>
+        </div>
+    </div>
+    
+  </ion-content>
+</ion-view>
