@@ -49,15 +49,15 @@ function ServiceBookCtrl($scope, $rootScope, DataService, $stateParams, $state, 
             $ionicHistory.nextViewOptions({
                 historyRoot : true
             })
+            $ionicLoading.hide();
             
         })
         .catch(function(err){
             console.log(err)
             vm.bookingError = err;
-        })
-        .finally(function(){
             $ionicLoading.hide();
         })
+        
     }
 
 

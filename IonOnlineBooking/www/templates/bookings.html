@@ -7,8 +7,21 @@
         </p>
     </div>
     <div class="list">
-        <div class="item item-text-wrap" ng-repeat="booking in BookingsCtrl.bookings">
-            {{booking}}
+        <div class="item item-icon-right item-text-wrap" ng-repeat="booking in BookingsCtrl.bookings">
+            <i class="icon ion-ios-circle-filled" ng-class="{'energized' : booking.status==='pending', 'balanced': booking.status==='confirmed'}"></i>
+            
+            <h2>
+                {{booking.service.shop.name}}
+            </h2>
+            <p>
+                {{booking.service.name}}
+            </p>
+            <p>
+                <b ng-class="{'energized' : booking.status==='pending', 'balanced': booking.status==='confirmed'}"> {{booking.start | date : 'dd/MM/yyyy HH:mm'}}</b>
+            </p>
+            <button class="button button-royal button-small">
+                Dettagli
+            </button>
         </div>
     </div>
     
