@@ -12,7 +12,7 @@ function BookingsCtrl($scope, $rootScope, DataService, $stateParams, $state){
     DataService.userBookings
     .getList()
     .then(function(bookings){
-        vm.bookings = bookings;
+        vm.bookings = _.map(bookings, function(b){ return b.plain( )});
     });
 
     
