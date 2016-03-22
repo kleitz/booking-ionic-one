@@ -53,11 +53,15 @@ function DataService(DataServiceRestangular){
     
     
     svc.shops = DataServiceRestangular.service("shops");
+    svc.me = DataServiceRestangular.oneUrl("me");
     svc.getBookingRanges = function(service, start, end){
         return DataServiceRestangular
             .allUrl('calculate-ranges')
             .getList({ start: start, end: end, service : service })
     }
+
+    svc.bookService = DataServiceRestangular.allUrl('book-service')
+    svc.userBookings = DataServiceRestangular.service('user-bookings');
 
 
     

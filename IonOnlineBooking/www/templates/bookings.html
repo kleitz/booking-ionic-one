@@ -1,0 +1,16 @@
+<ion-view view-title="Prenotazioni">
+  <ion-content>
+    <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">{{user.email}}</h1>
+        <p class="white-text">
+            Prenotazioni
+        </p>
+    </div>
+    <div class="list">
+        <div class="item item-text-wrap" ng-repeat="booking in BookingsCtrl.bookings">
+            {{booking}}
+        </div>
+    </div>
+    
+  </ion-content>
+</ion-view>

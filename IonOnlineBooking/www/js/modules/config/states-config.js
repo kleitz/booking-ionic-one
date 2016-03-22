@@ -12,12 +12,20 @@ angular.module('app.statesconfig', ['ionic'])
         $state.go("app.login");
     })
 
+    /*
     $rootScope.$on("app:loginSuccess", function(){
         $ionicHistory.nextViewOptions({
             historyRoot : true
         })
         $state.go("app.account");
     })
+    */
+
+    $rootScope.$on('$stateChangePermissionDenied',
+        function(event, toState, toParams, options) { 
+            $state.go("app.login", { next : toState.name, nextParams:toParams })
+        }
+    );
     
 
 })
@@ -31,7 +39,7 @@ angular.module('app.statesconfig', ['ionic'])
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl'
+        controller: 'AppCtrl',
     })
 
     .state('app.home', {
@@ -41,6 +49,57 @@ angular.module('app.statesconfig', ['ionic'])
                 templateUrl: 'templates/home.html',
                 controller : 'HomeCtrl as HomeCtrl'
             }
+        }
+    })
+
+    .state('app.login', {
+        url: '/login',
+        cache : false,
+        params : { next : null, nextParams : null },
+        controller : 'LoginCtrl',
+
+        onEnter : function($state, $stateParams, $rootScope, $ionicModal, $auth, $timeout){
+            var modal;
+
+            function redirect(){
+                if(!$stateParams.next){
+                    $state.go('app.home', {});
+                    return;
+                }
+                $state.go($stateParams.next, $stateParams.nextParams )
+            }
+
+            var s = $rootScope.$on("app:loginSuccess", function(){
+                if($rootScope.loginModal){
+                    $rootScope.loginModal.hide();
+                }
+                s();
+                redirect();
+            });
+            
+            $timeout(function(){
+                $ionicModal.fromTemplateUrl('templates/modal_login.html', {
+                    backdropClickToClose: false, hardwareBackButtonClose:false,
+                    scope:$rootScope })
+                .then(function(modal){
+                    $rootScope.loginModal = modal;
+                    if($rootScope.logged){
+                       redirect();
+                       return;
+                    }
+                    modal.show();
+                    
+                })
+            }, 200)
+            
+             
+        },
+        onExit : function($state, $rootScope){
+            if($rootScope.loginModal){
+                $rootScope.loginModal.remove();    
+            }
+            
+
         }
     })
 
@@ -74,6 +133,22 @@ angular.module('app.statesconfig', ['ionic'])
         }
     })
 
+    .state('app.service-book', {
+        url: '/shop-service-book/:shopId/service/:serviceId/:start/:end',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/service_book.html',
+                controller : 'ServiceBookCtrl as ServiceBookCtrl'
+            }
+        },
+        data: {
+            permissions: {
+                only: ['logged'],
+                //redirectTo : 'app.login'
+            }
+        }
+    })
+
     .state('app.browse', {
         url: '/browse',
         views: {
@@ -91,6 +166,22 @@ angular.module('app.statesconfig', ['ionic'])
             }
         }
     })
+
+    .state('app.bookings', {
+        url: '/bookings',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/bookings.html',
+                controller : 'BookingsCtrl as BookingsCtrl'
+            }
+        },
+        data: {
+            permissions: {
+                only: ['logged']
+            }
+        },
+
+    })
     
     .state('app.account', {
         url: '/account',
@@ -101,23 +192,13 @@ angular.module('app.statesconfig', ['ionic'])
         },
         data: {
             permissions: {
-                only: ['logged'],
-                redirectTo : 'app.login'
+                only: ['logged']
             }
         },
 
     })
 
-    .state('app.login', {
-        url: '/login',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/login.html',
-                controller: 'LoginCtrl'
-            }
-        },
-
-    })
+     
 
     $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get('$state');

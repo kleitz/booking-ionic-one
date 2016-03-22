@@ -8,6 +8,11 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-clear button-royal">
+          <span ng-show="logged">{{user.email}}</span>
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
@@ -32,11 +37,14 @@
         <ion-item menu-close ui-sref="app.account">
           Account
         </ion-item>
+        <ion-item class="item-royal" menu-close ui-sref="app.bookings" ng-if="logged">
+          Prenotazioni
+        </ion-item>
 
       </ion-list>
     </ion-content>
     <ion-footer-bar class="bar-stable">
-      <h2 class="title" ng-if="user" ng-click="logout()"><a menu-close>Logout</a></h2>
+      <h2 class="title" ng-if="logged" ng-click="logout()"><a menu-close>Logout</a></h2>
     </ion-footer-bar>
   </ion-side-menu>
 </ion-side-menus>

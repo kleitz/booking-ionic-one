@@ -8,7 +8,7 @@ angular.module('app.permissions', ['permission'])
   // Example: Define anonymous role based on $rootScope "user" property
   PermissionStore.definePermission('logged', function () {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if (!$rootScope.user) {
+    if (!$rootScope.logged) {
       return false; // Is anonymous
     }
     return true;

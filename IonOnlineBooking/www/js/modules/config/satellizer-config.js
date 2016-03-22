@@ -3,11 +3,11 @@
 
 angular.module('app.satellizerconfig', ['satellizer'])
 
-.config(function ($authProvider) {
+.config(function ($authProvider, baseServerUrl) {
   /* configuring satellizer for working with django rest framework token auth */
-  $authProvider.baseUrl = 'http:/localhost:8000';
-  $authProvider.loginUrl = '/api-token-auth/';
-  $authProvider.authToken = 'Token';
+  $authProvider.baseUrl = baseServerUrl;
+  $authProvider.loginUrl = 'auth/';
+  $authProvider.authToken = 'JWT';
 });
 
 })();

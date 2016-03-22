@@ -18,9 +18,9 @@
       </button>
       Disponibilità del {{ ServiceCtrl.currentDay }}
     </div>
-    <div class="item item-positive item-button-right" ng-repeat="range in ServiceCtrl.rangesByDates[ServiceCtrl.currentDay]">
+    <div class="item item-button-right" ng-repeat="range in ServiceCtrl.rangesByDates[ServiceCtrl.currentDay]">
       {{ range.start_moment.format("HH:mm") }} - {{ range.end_moment.format("HH:mm") }}
-      <button class="button button-energized button-outline">
+      <button class="button button-royal button-outline" ui-sref="app.service-book({serviceId:ServiceCtrl.service.id, shopId:ServiceCtrl.shop.id, start:range.start, end:range.end })">
         Prenota
       </button>
     </div>

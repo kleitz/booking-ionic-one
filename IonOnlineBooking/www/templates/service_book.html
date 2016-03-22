@@ -1,0 +1,61 @@
+<ion-view view-title="Service">
+  <ion-content class="has-header">
+  <div class="item item-royal item-text-wrap text-center">
+        <h1 class="white-text">{{ServiceBookCtrl.service.name}}</h1>
+        <p class="white-text">
+            {{ServiceBookCtrl.shop.name}}
+        </p>
+    </div>
+    <div class="item item-body text-center item-royal">
+      <p class="white-text">Conferma la prenotazione</p>
+    </div>
+
+    <div class="item item-body">
+      <div class="row">
+        <div class="col text-center">
+          Dalle<br>  
+          {{ServiceBookCtrl.start_formatted}}
+        </div>
+        <div class="col text-center">
+          Alle<br>  
+          {{ServiceBookCtrl.end_formatted}}
+        </div>
+      </div>
+      
+      <div class="row" ng-if="!ServiceBookCtrl.booked && !ServiceBookCtrl.bookingError">
+        <div class="col">
+          <button class="button button-block button-royal" ng-click="ServiceBookCtrl.bookCurrent()">
+            Prenota
+          </button>
+        </div>
+      </div>
+
+      
+    
+    </div>
+
+    <div class="item text-center" ng-if="ServiceBookCtrl.booked">
+        <b>Prenotazione effettuata</b> <br>
+        <button class="button button-positive" ui-sref="app.bookings">
+          Visualizza le tue prenotazioni
+        </button>
+      
+    </div>
+
+    <div class="item item-assertive text-center" ng-if="ServiceBookCtrl.bookingError">
+        <b class="white-text">Impossibile prenotare</b>
+        <div ng-if="ServiceBookCtrl.bookingError.status==422">
+          <br>
+        <button class="button button-dark"  ng-click="ServiceBookCtrl.toDaySelection()">Cambia ora o giorno</button>
+        </div>
+        
+      
+    </div>
+  
+  
+    
+  </ion-content>
+  <ion-footer-bar class="bar-royal">
+  <button class="button button-dark" ng-click="ServiceBookCtrl.toDaySelection()">Cambia ora o giorno</button>
+  </ion-footer-bar>
+</ion-view>

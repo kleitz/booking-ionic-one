@@ -11,10 +11,16 @@
     <link rel="stylesheet" href="lib/ionic-calendar/dist/css/calendar.min.css"/>
     <style>
     .event-detail-container{ position:relative !important;}
-    .monthview-current, .monthview-selected {
-        background-color: #fff;
+    .monthview-current {
+        background-color: transparent;
         color: #222;
     }
+    .monthview-selected {
+        background-color: #3a87ad;
+        color: #fff;
+    }
+
+    
     .event-detail-table{
         display: none;
     }
@@ -47,7 +53,9 @@
     <script src="js/controllers/home-controller.js"></script>
     <script src="js/controllers/shop-controller.js"></script>
     <script src="js/controllers/service-controller.js"></script>
-    <script src="js/controllers/login-controller.js"></script>
+    <script src="js/controllers/service-book-controller.js"></script>
+    <script src="js/controllers/login-controller-satellizer.js"></script>
+    <script src="js/controllers/bookings-controller.js"></script>
 
     <script src="js/services/data-service.js"></script>
 

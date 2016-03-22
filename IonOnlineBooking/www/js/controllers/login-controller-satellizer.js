@@ -5,7 +5,6 @@ angular.module('app')
 .controller('LoginCtrl', LoginCtrl);
 
 function LoginCtrl($scope, $auth, $rootScope){
-
     $scope.credentials = {
         username : '',
         password : ''
